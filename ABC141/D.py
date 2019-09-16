@@ -1,27 +1,13 @@
-# not clear
-import numpy as np
+import heapq
 
 N, M = map(int, input().split())
-a = np.array(list(map(int, input().split())))
+a = list(map(int, input().split()))
 
-if N == 1:
-    for i in range(M):
-        a //= 2
-    print(a[0])
-    exit()
-
-a.sort()
-cur = M - 1
+q = []
+for i in range(N):
+    # 最も大きい値を取り出して1/2したいので、ここで反転させておき、最終的に足す時に戻す
+    heapq.heappush(q, -a[i])
 for i in range(M):
-    if i == 0:
-        a[-1] //= 2
-    else:
-        if (a[cur-1] > a[cur]):
-            cur -= 1
-            a[a[cur:].argmax()+cur] //= 2
-        else:
-            if cur == M-1:
-                a[-1] //= 2
-            else:
-                a[a[cur:].argmax()+cur] //= 2
-print(sum(a))
+    l = heapq.heappop(q)
+    heapq.heappush(q, -(-l//2))
+print(-sum(q))
