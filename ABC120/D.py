@@ -1,5 +1,3 @@
-# union find
-
 def find_root(x):
     if parent[x] == x:
         return x
@@ -30,7 +28,6 @@ def same(x, y):
 
 N, M = map(int, input().split())
 ab = [list(map(int, input().split())) for _ in range(M)]
-print(ab)
 
 parent = [i for i in range(N)]  # 根
 rank = [1] * N  # 深さ
@@ -38,7 +35,6 @@ size = [1] * N  # iを根とするグループのサイズ
 
 # 前処理
 edge = [[ab[M - 1 - i][0] - 1, ab[M - 1 - i][1] - 1] for i in range(M)]
-print(edge)
 
 res = []
 for i in range(M):
@@ -49,7 +45,6 @@ for i in range(M):
     else:
         res.append(size[a] * size[b])
         unite(a, b)
-print(res)
 ans = 0
 for i in range(M):
     ans += res[M - 1 - i]
