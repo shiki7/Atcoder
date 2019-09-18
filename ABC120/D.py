@@ -1,3 +1,4 @@
+# union find
 def find_root(x):
     if parent[x] == x:
         return x
