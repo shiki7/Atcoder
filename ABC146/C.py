@@ -1,21 +1,17 @@
 a, b, x = map(int, input().split())
 
-ans = 0
-max_digit = 0
 
-for i in range(1, 19):
-    num = 10 ** (i - 1)
-    if a * num + b * len(str(num)) <= x:
-        max_digit = max(max_digit, i)
+def check(m, x):
+    return a*m + b * len(str(m)) <= x
+
+
+left = 0
+right = 10**9+1
+# 二分探索
+while right - left > 1:
+    mid = (left + right) // 2
+    if check(mid, x):
+        left = mid
     else:
-        break
-if max_digit == 0:
-    print(0)
-    exit()
-if max_digit > 10:
-    max_digit = 10
-ans = (x - b * (max_digit)) // a
-if ans >= 10**9:
-    print(10**9)
-    exit()
-print(ans)
+        right = mid
+print(left)
