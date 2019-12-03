@@ -1,5 +1,4 @@
-# TLE
-
+# python3 2.1s, pypy3 1.3s
 n = int(input())
 s = input()
 
@@ -27,4 +26,8 @@ for a in range(10):
                     if int(s[k]) == c:
                         count += 1
                         break
+            if not f1 or not f2:
+                break
+        if not f1:
+            break
 print(count)
