@@ -1,27 +1,13 @@
-# not clear
-N, K = map(int, input().split())
-A = list(map(int, input().split()))
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
 
-
-def count(A: list, i):
-    total = 0
-    B = A*i
-    for i in range(len(B)):
-        for j in range(1, len(B)):
-            if j <= i:
-                continue
-            elif B[i] > B[j]:
-                total += 1
-    return total
-
-
-if K < 4:
-    print(count(A, K))
-    exit()
-
-x2 = count(A, 2)
-x3 = count(A, 3)
-x4 = count(A, 4)
-a = (x4-x3) - (x3-x2)
-ans = a * (K-1) * (K-2)//2 + x2*(K)
-print(ans % (10**9+7))
+cnt1 = 0
+cnt2 = 0
+mod = 10**9+7
+for i in range(0, n):
+    for j in range(i+1, n):
+        if a[i] > a[j]:
+            cnt1 += 1
+        elif a[i] < a[j]:
+            cnt2 += 1
+print(((k*(k+1)//2 % mod) * cnt1 % mod + ((k-1)*k//2 % mod)*cnt2 % mod) % mod)
