@@ -13,6 +13,7 @@ wp = [list(map(int, input().split())) for _ in range(n)]
 left = 0
 right = 100
 
+# 試行回数は100回ぐらいでも通るかも..
 for i in range(1000):
     mid = (left+right)/2
     if check(mid, wp, k):
