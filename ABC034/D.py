@@ -1,3 +1,4 @@
+# 平均最大化 ＋二分探索
 def check(mid, wp, k):
     arr = []
     for i in range(n):
