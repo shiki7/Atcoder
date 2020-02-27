@@ -1,4 +1,6 @@
+# １を始点とする全組み合わせに対して、辺があるか全探索
 import itertools
+
 n, m = map(int, input().split())
 ab = [list(map(int, input().split())) for _ in range(m)]
 
