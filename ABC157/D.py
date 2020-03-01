@@ -25,29 +25,22 @@ def unite(x, y):
             if rank[x] == rank[y]:
                 rank[x] += 1
 
-# xとyが同じグループかどうか判定
-
 
 def same(x, y):
     return find_root(x) == find_root(y)
 
 
-dic = defaultdict(list)
+def group_size(x):
+    return size[find_root(x)]
+
+
+dic1 = defaultdict(list)
+dic2 = defaultdict(list)
 
 n, m, k = map(int, input().split())
 ab = [list(map(int, input().split())) for _ in range(m)]
 cd = [list(map(int, input().split())) for _ in range(k)]
 
-for i in range(m):
-    a = ab[i][0]
-    b = ab[i][1]
-    dic[a].append(b)
-    dic[b].append(a)
-for i in range(k):
-    c = cd[i][0]
-    d = cd[i][1]
-    dic[c].append(d)
-    dic[d].append(c)
 
 parent = [i for i in range(n)]  # 根
 rank = [1] * n  # 深さ
@@ -64,9 +57,21 @@ for i in range(m):
     else:
         res.append(size[a] * size[b])
         unite(a, b)
-print(edge)
-print(size)
+
+
+for i in range(m):
+    a = ab[i][0] - 1
+    b = ab[i][1] - 1
+    dic1[a].append(b)
+    dic1[b].append(a)
+for i in range(k):
+    c = cd[i][0] - 1
+    d = cd[i][1] - 1
+    if same(c, d):
+        dic2[c].append(d)
+        dic2[d].append(c)
+
 ans = []
 for i in range(n):
-    ans.append(size[i] - len(dic[i+1]))
+    ans.append(group_size(i)-1 - len(dic1[i]) - len(dic2[i]))
 print(' '.join(map(str, ans)))
