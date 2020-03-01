@@ -1,5 +1,3 @@
-# not fix
-
 from collections import defaultdict
 
 
@@ -10,7 +8,6 @@ def find_root(x):
         return find_root(parent[x])
 
 
-# x,yの属する集合の併合
 def unite(x, y):
     x = find_root(x)
     y = find_root(y)
@@ -48,14 +45,10 @@ size = [1] * n  # iを根とするグループのサイズ
 
 edge = [[ab[m - 1 - i][0] - 1, ab[m - 1 - i][1] - 1] for i in range(m)]
 
-res = []
 for i in range(m):
     a = find_root(edge[i][0])
     b = find_root(edge[i][1])
-    if a == b:
-        res.append(0)
-    else:
-        res.append(size[a] * size[b])
+    if a != b:
         unite(a, b)
 
 
