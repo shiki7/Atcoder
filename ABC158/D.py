@@ -5,7 +5,9 @@ S = input().rstrip()
 Q = int(input())
 query = [list(input().split()) for _ in range(Q)]
 
+a = ''
 ans = S
+b = ''
 flag = True
 
 for i in range(Q):
@@ -19,14 +21,15 @@ for i in range(Q):
         f = query[i][1]
         c = query[i][2].rstrip()
         if f == '1' and flag:
-            ans = c + ans
+            a = c + a
         elif f == '1' and not flag:
-            ans = ans + c
+            b = b + c
         elif f == '2' and flag:
-            ans = ans + c
+            b = b + c
         elif f == '2' and not flag:
-            ans = c + ans
+            a = c + a
 if flag:
-    print(ans)
+    print(a + ans + b)
 else:
-    print(ans[::-1])
+    tmp = a + ans + b
+    print(tmp[::-1])
