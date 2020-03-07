@@ -1,35 +1,35 @@
+# pypyだとTLEになるので注意
 import sys
 input = sys.stdin.readline
 
 S = input().rstrip()
 Q = int(input())
-query = [list(input().split()) for _ in range(Q)]
+head = ''
+tail = ''
+rev = False
 
-a = ''
-ans = S
-b = ''
-flag = True
-
-for i in range(Q):
-    if query[i][0] == '1':
-        if flag:
-            flag = False
+for _ in range(Q):
+    query = list(input().split())
+    if query[0] == '1':
+        if rev:
+            rev = False
         else:
-            flag = True
-        continue
-    elif query[i][0] == '2':
-        f = query[i][1]
-        c = query[i][2].rstrip()
-        if f == '1' and flag:
-            a = c + a
-        elif f == '1' and not flag:
-            b = b + c
-        elif f == '2' and flag:
-            b = b + c
-        elif f == '2' and not flag:
-            a = c + a
-if flag:
-    print(a + ans + b)
-else:
-    tmp = a + ans + b
+            rev = True
+    elif query[0] == '2':
+        f = query[1]
+        c = query[2].rstrip()
+        if f == '1':
+            if rev:
+                tail = tail + c
+            else:
+                head = c + head
+        else:
+            if rev:
+                head = c + head
+            else:
+                tail = tail + c
+if rev:
+    tmp = head + S + tail
     print(tmp[::-1])
+else:
+    print(head + S + tail)
