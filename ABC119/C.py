@@ -1,28 +1,18 @@
-import math
-
 N, A, B, C = map(int, input().split())
-l_list = [int(input()) for _ in range(N)]
-
-# それぞれのl_listの竹を Aで使う or Bで使う or Cで使う or 使わないのどれかを全探索してA,B,Cを構築する
-# 消費MPは 長さを増やす、減らす:1, 合成する:10
+li = [int(input()) for _ in range(N)]
 
 
-# 深さ優先探索で全探索する cur:現在の竹, used_count:合成された竹の数
-def dfs(cur, a, b, c, used_count):
-    # Nまで決まったら合成する
+def dfs(cur, a, b, c):
     if cur == N:
-        # A,B,Cに使われた竹がないということは解答なしでINFを返す
-        if a == 0 or b == 0 or c == 0:
-            return math.inf
-        # 誤差分はMP1で調整 ＋ 合成分はMP10 * (使用した本数 -3)  ※3を引いているのは元のぶんは合成にカウントしないから
+        if min(a, b, c) > 0:
+            return abs(A-a) + abs(B-b) + abs(C-c) - 30
         else:
-            return abs(a - A) + abs(b - B) + abs(c - C) + (used_count - 3) * 10
-    res = math.inf
-    res = min(res, dfs(cur + 1, a + l_list[cur], b, c, used_count + 1))
-    res = min(res, dfs(cur + 1, a, b + l_list[cur], c, used_count + 1))
-    res = min(res, dfs(cur + 1, a, b, c + l_list[cur], used_count + 1))
-    res = min(res, dfs(cur + 1, a, b, c, used_count))
-    return res
+            return float('inf')
+    ret0 = dfs(cur+1, a, b, c)
+    ret1 = dfs(cur+1, a+li[cur], b, c) + 10
+    ret2 = dfs(cur+1, a, b+li[cur], c) + 10
+    ret3 = dfs(cur+1, a, b, c+li[cur]) + 10
+    return min(ret0, ret1, ret2, ret3)
 
 
-print(dfs(0, 0, 0, 0, 0))
+print(dfs(0, 0, 0, 0))
