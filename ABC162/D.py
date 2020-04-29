@@ -1,4 +1,3 @@
-# pypyでないとTLEになる
 N = int(input())
 S = input()
 
@@ -12,7 +11,7 @@ for i in range(N-2):
     for j in range(i+1, N-1):
         k = j + (j-i)
         if k > N-1:
-            continue
-        if len(set([S[i], S[j], S[k]])) == 3:
+            break
+        if S[i] != S[j] and S[j] != S[k] and S[k] != S[i]:
             sum_rgb -= 1
 print(sum_rgb)
