@@ -1,6 +1,5 @@
 from collections import defaultdict
 d = defaultdict(int)
-
 s = input()
 
 for i in range(5):
