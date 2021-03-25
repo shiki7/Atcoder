@@ -1,5 +1,4 @@
 cnt = int(input())
-
 S = input()
 if cnt == 0:
     print('Yes')
